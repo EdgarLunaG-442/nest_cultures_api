@@ -12,11 +12,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-        run: |
+      - run: |
           npm i
           npm test:cov
       - name: SonarCloud Scan
