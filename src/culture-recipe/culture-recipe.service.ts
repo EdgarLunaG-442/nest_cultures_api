@@ -58,9 +58,9 @@ export class CultureRecipeService {
     let culture: CultureEntity = await this.cultureService.findOne(cultureId);
     culture.recipes = [];
     culture = await this.cultureRepository.save(culture);
-    for (let i = 0; i < recipes.length; i++) {
-      recipes[i].culture = culture;
-      await this.recipeRepository.save(recipes[i]);
+    for (let recipe of recipes) {
+      recipe.culture = culture;
+      await this.recipeRepository.save(recipe);
     }
 
     return await this.cultureService.findOne(cultureId);

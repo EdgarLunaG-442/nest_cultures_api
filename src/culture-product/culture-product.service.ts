@@ -151,8 +151,8 @@ export class CultureProductService {
   ): Promise<ProductEntity> {
     const product: ProductEntity = await this.productService.findOne(productId);
     const newCultures = [];
-    for (let i = 0; i < culturesIds.length; i++) {
-      newCultures.push(await this.cultureService.findOne(culturesIds[i]));
+    for (let cultureId of culturesIds) {
+      newCultures.push(await this.cultureService.findOne(cultureId));
     }
     product.cultures = newCultures;
     const newProduct = await this.productRepository.save(product);
@@ -168,8 +168,8 @@ export class CultureProductService {
   ): Promise<CultureEntity> {
     const culture: CultureEntity = await this.cultureService.findOne(cultureId);
     const newProducts = [];
-    for (let i = 0; i < productsIds.length; i++) {
-      newProducts.push(await this.productService.findOne(productsIds[i]));
+    for (let productId of productsIds) {
+      newProducts.push(await this.productService.findOne(productId));
     }
     culture.products = newProducts;
     const newCulture = await this.cultureRepository.save(culture);

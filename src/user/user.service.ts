@@ -24,12 +24,12 @@ export class UserService implements OnModuleInit {
 
   async onModuleInit() {
     const users = this.generateSeedUsers();
-    for (let i = 0; i < users.length; i++) {
-      const userEntity = await this.userRepository.save(users[i]);
-      for (let index = 0; index < userEntity.roles.length; index++) {
+    for (let user of users) {
+      const userEntity = await this.userRepository.save(user);
+      for (let rawRole of userEntity.roles) {
         const role: RoleEntity = {
           id: faker.datatype.uuid(),
-          name: userEntity.roles[index],
+          name: rawRole,
           user: userEntity,
         };
         await this.roleRepository.save(role);
