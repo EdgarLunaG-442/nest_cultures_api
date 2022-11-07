@@ -117,9 +117,9 @@ export class CultureRestaurantService {
         BusinessError.NOT_FOUND,
       );
 
-    for (let i = 0; i < restaurants.length; i++) {
+    for (let currentRestaurant of restaurants) {
       const restaurant: RestaurantEntity = await this.restaurantService.findOne(
-        restaurants[i].id,
+        currentRestaurant.id,
       );
       if (!restaurant)
         throw new BusinessLogicException(
